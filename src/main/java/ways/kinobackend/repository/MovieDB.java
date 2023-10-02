@@ -1,14 +1,10 @@
 package ways.kinobackend.repository;
 import ways.kinobackend.model.Movie;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MovieDB {
@@ -76,8 +72,40 @@ public class MovieDB {
         }
     }
 
+    public Movie getMovieById(int movieId) {
+        Connection con = ConnectionManager.getConnection();
+        String SQLScript = "SELECT * FROM movies WHERE id=?";
+        Movie movie = null;
 
-    public class ConnectionManager {
+        try {
+            PreparedStatement ps = con.prepareStatement(SQLScript);
+            ps.setInt(1, movieId);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                movie = new Movie();
+                movie.setId(rs.getInt("id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setDuration(rs.getInt("duration"));
+                movie.setDirector(rs.getString("director"));
+                movie.setImage(rs.getString("image"));
+                movie.setGenre(rs.getString("genre"));
+                movie.setDescription(rs.getString("description"));
+                movie.setPegi(rs.getString("pegi"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving movie with ID " + movieId, e);
+        }
+
+        return movie;
+    }
+
+
+
+
+
+
+public class ConnectionManager {
 
         private static final String URL = "jdbc:mysql://localhost:3306/your_database_name";
         private static final String USERNAME = "your_username";

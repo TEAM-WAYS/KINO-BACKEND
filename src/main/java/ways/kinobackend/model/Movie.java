@@ -1,8 +1,14 @@
 package ways.kinobackend.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Movie {
-    private String title;
+
+    @Id
     private int id;
+    private String title;
     private int duration;
     private String director;
     private String image;

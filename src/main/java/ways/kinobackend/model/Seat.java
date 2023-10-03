@@ -1,8 +1,13 @@
 package ways.kinobackend.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Seat {
-    private int status;
+
+    @Id
     private int id;
+    private int status;
     private int row;
     private int number;
 

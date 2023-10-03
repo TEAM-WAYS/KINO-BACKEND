@@ -1,8 +1,13 @@
 package ways.kinobackend.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
 public class Hall {
-    private int seat;
+    @Id
     private int id;
+    private int seat;
     private int screenSize;
     private String name;
 

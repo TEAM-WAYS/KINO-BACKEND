@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Entity
 public class Hall {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int seat;
     private int screenSize;

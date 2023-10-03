@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class Seat {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int status;
     private int row;

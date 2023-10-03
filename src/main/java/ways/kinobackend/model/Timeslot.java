@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @Entity
 public class Timeslot {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalTime start;
     private LocalTime end;

@@ -13,6 +13,7 @@ public class Timeslot {
     private LocalTime start;
     private LocalTime end;
 
+    //price of the movie missing
     public LocalTime getStart() {
         return start;
     }

@@ -15,7 +15,6 @@ import java.util.Optional;
 @CrossOrigin
 public class MovieRestController {
 
-    /*
     @Autowired
     private MovieService movieService;
 
@@ -48,7 +47,7 @@ public class MovieRestController {
         if (foundMovie.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie didn't update");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(movieFound);
+            return ResponseEntity.status(HttpStatus.OK).body(foundMovie);
         }
     }
     @DeleteMapping("/movies/delete/{id}")
@@ -60,8 +59,8 @@ public class MovieRestController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie not deleted");
         }
-    }*/
-
+    }
+/*
     @Autowired
     MovieRepository movieRepository;
 
@@ -111,4 +110,5 @@ public class MovieRestController {
             return ResponseEntity.notFound().build();
         }
     }
+    */
 }

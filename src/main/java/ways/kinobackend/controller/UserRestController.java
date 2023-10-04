@@ -19,12 +19,12 @@ public class UserRestController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUser() {
-        List<User> movieList = userService.getUser();
+        List<User> userList = userService.getUser();
 
-        if (movieList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(movieList);
+        if (userList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userList);
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(movieList);
+            return ResponseEntity.status(HttpStatus.OK).body(userList);
         }
     }
 

@@ -23,6 +23,7 @@ public class MovieServiceImpl implements MovieService{
         return Optional.of(movieRepository.save((movie)));
     }
 
+    @Override
     public Optional<Movie> putMovie(Movie movie){
         Optional<Movie> foundMovie = movieRepository.findById(movie.getId());
 
@@ -31,6 +32,7 @@ public class MovieServiceImpl implements MovieService{
         } else return Optional.empty();
     }
 
+    @Override
     public boolean deleteMovie(int id) {
         Optional<Movie> foundMovie = movieRepository.findById(id);
 

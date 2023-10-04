@@ -3,7 +3,6 @@ package ways.kinobackend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ways.kinobackend.model.Timeslot;
-import ways.kinobackend.model.User;
 import ways.kinobackend.repository.TimeslotRepository;
 
 import java.util.List;

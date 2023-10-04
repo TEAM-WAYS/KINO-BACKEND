@@ -3,7 +3,6 @@ package ways.kinobackend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ways.kinobackend.model.Hall;
-import ways.kinobackend.model.Movie;
 import ways.kinobackend.repository.HallRepository;
 
 import java.util.List;

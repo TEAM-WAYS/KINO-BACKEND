@@ -1,9 +1,7 @@
 package ways.kinobackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 @Entity
 public class User {
     @Id
@@ -13,6 +11,10 @@ public class User {
     private String passWord;
     private int email;
     private int phone;
+    @OneToOne
+    @JoinColumn(name="seat",referencedColumnName = "id")
+    private Seat seat;
+
 
     public int getId() {
         return id;
@@ -52,5 +54,13 @@ public class User {
 
     public void setPhone(int phone) {
         this.phone = phone;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 }

@@ -1,9 +1,10 @@
 package ways.kinobackend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -20,6 +21,11 @@ public class Movie {
     private String genre;
     private String description;
     private String pegi;
+
+    @ManyToOne
+    @JoinColumn(name = "timeslot", referencedColumnName = "id")
+    private Timeslot timeslot;
+
 
     public String getTitle() {
         return title;
@@ -83,5 +89,13 @@ public class Movie {
 
     public void setPegi(String pegi) {
         this.pegi = pegi;
+    }
+
+    public Timeslot getTimeslot() {
+        return timeslot;
+    }
+
+    public void setTimeslot(Timeslot timeslot) {
+        this.timeslot = timeslot;
     }
 }

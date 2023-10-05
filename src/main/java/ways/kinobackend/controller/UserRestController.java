@@ -46,7 +46,7 @@ public class UserRestController {
         if (foundUser.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user didn't update");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(foundUser);
+            return ResponseEntity.status(HttpStatus.OK).body("user updated successfully");
         }
     }
     @DeleteMapping("/users/delete/{id}")

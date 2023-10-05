@@ -45,7 +45,7 @@ public class TimeslotRestController {
         if (foundTime.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("time didn't update");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(foundTime);
+            return ResponseEntity.status(HttpStatus.OK).body("time updated successfully");
         }
     }
 

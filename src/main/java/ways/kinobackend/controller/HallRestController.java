@@ -41,9 +41,9 @@ public class HallRestController {
         Optional<Hall> foundHall = hallService.putHall(hall);
 
         if (foundHall.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("hall didn't update");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("hall not found or couldn't be updated");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(foundHall);
+            return ResponseEntity.status(HttpStatus.OK).body("hall updated successfully");
         }
     }
 

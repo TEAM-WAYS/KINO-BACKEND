@@ -31,8 +31,10 @@ public class MovieRestController {
 
     @PostMapping("/movies")
     public ResponseEntity<?> postMovie(@RequestBody Movie movie){
+        //HTTP Post request med Movie object i JSON format i en request body
         Optional<Movie> savedMovie = movieService.postMovie(movie);
-
+        //kalder postMovie metode i movieservice som har logiken til at lave og gemme Movie
+        //checker om savedmovie container en værdi
         if (savedMovie.isPresent()){
             return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie.get());
         } else {
@@ -40,16 +42,37 @@ public class MovieRestController {
         }
     }
 
+    // possible better way of doing post not tested
+    /*
+        @PostMapping
+    public ResponseEntity<?> postMovie(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
+        // Validerer Movie objektet der kommer
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error: " + bindingResult.getAllErrors());
+        }
+
+        try {
+            Movie savedMovie = movieService.saveMovie(movie);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
+        } catch (Exception e) {
+            // Handle any exceptions that may occur during movie creation
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save the movie: " + e.getMessage());
+        }
+    }
+     */
+
     @PutMapping("/movies")
     public ResponseEntity<?> putMovie(@RequestBody Movie movie){
         Optional<Movie> foundMovie = movieService.putMovie(movie);
 
         if (foundMovie.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie didn't update");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found or couldn't be updated");
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(foundMovie);
+            return ResponseEntity.status(HttpStatus.OK).body("Movie updated successfully");
         }
     }
+
     @DeleteMapping("/movies/delete/{id}")
     public ResponseEntity<String> deleteMovie(@PathVariable int id){
         Boolean foundMovie = movieService.deleteMovie(id);
@@ -60,55 +83,4 @@ public class MovieRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie not deleted");
         }
     }
-/*
-    @Autowired
-    MovieRepository movieRepository;
-
-    @GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
-        Optional<Movie> movieOptional = movieRepository.findById(id);
-        return movieOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping("/movies")
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        Movie createdMovie = movieRepository.save(movie);
-        return ResponseEntity.ok(createdMovie);
-    }
-
-    @GetMapping("/movies")
-    public List<Movie> getMovies() {
-        return movieRepository.findAll();
-    }
-
-    @PutMapping("/movies/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie updatedMovie) {
-        Optional<Movie> existingMovieOptional = movieRepository.findById(id);
-        if (existingMovieOptional.isPresent()) {
-            Movie existingMovie = existingMovieOptional.get();
-            existingMovie.setTitle(updatedMovie.getTitle());
-            existingMovie.setDuration(updatedMovie.getDuration());
-            existingMovie.setDirector(updatedMovie.getDirector());
-            existingMovie.setImage(updatedMovie.getImage());
-            existingMovie.setGenre(updatedMovie.getGenre());
-            existingMovie.setDescription(updatedMovie.getDescription());
-            existingMovie.setPegi(updatedMovie.getPegi());
-
-            Movie updated = movieRepository.save(existingMovie);
-            return ResponseEntity.ok(updated);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable int id) {
-        if (movieRepository.existsById(id)) {
-            movieRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-    */
 }

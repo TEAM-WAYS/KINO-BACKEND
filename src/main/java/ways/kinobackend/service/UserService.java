@@ -13,4 +13,8 @@ public interface UserService {
     Optional<User> putUser(User user);
 
     boolean deleteUser(int id);
+
+    Boolean deleteUserByPassword(User user);
+
+    Optional<User> putUserByPassword(User user);
 }

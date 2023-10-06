@@ -41,22 +41,23 @@ public class UserRestController {
 
     @PutMapping("/users")
     public ResponseEntity<?> putUser(@RequestBody User user){
-        Optional<User> foundUser = userService.putUser(user);
+        Optional<User> foundUser = userService.putUserByPassword(user);
 
-        if (foundUser.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user didn't update");
-        } else {
+        if (foundUser.isPresent()){
             return ResponseEntity.status(HttpStatus.OK).body("user updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found or password incorrect");
         }
     }
-    @DeleteMapping("/users/delete/{id}")
-    public ResponseEntity<String> deleteMovie(@PathVariable int id){
-        Boolean movieFound = userService.deleteUser(id);
 
-        if (movieFound){
+    @DeleteMapping("/users/delete")
+    public ResponseEntity<String> deleteUser(@RequestBody User user){
+        Boolean userDeleted = userService.deleteUserByPassword(user);
+
+        if (userDeleted){
             return ResponseEntity.status(HttpStatus.OK).body("user deleted");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not deleted");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found or password incorrect");
         }
     }
 }

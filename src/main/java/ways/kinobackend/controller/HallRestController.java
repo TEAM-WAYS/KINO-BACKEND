@@ -5,14 +5,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ways.kinobackend.model.Hall;
+import ways.kinobackend.repository.HallRepository;
 import ways.kinobackend.service.HallService;
 
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+
 public class HallRestController {
     @Autowired
     private HallService hallService;
+
+    @Autowired
+    private HallRepository hallRepository;
 
     @GetMapping("/Halls")
     public ResponseEntity<List<Hall>> getHalls() {
@@ -57,4 +63,5 @@ public class HallRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("hall not deleted");
         }
     }
+
 }

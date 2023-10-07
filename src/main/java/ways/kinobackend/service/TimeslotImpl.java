@@ -42,4 +42,15 @@ public class TimeslotImpl implements TimeslotService{
 
         return false;
     }
+
+    @Override
+    public Optional<Timeslot> getTimeslotById(int id) {
+        Optional<Timeslot> found = timeslotRepository.findById(id);
+        if(found.isPresent()){
+            return found;
+        }
+        else {
+            return Optional.empty();
+        }
+    }
 }

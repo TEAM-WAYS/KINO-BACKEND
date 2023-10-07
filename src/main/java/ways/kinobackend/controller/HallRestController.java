@@ -9,12 +9,13 @@ import ways.kinobackend.service.HallService;
 
 import java.util.List;
 import java.util.Optional;
-
+@RestController
+@CrossOrigin
 public class HallRestController {
     @Autowired
     private HallService hallService;
 
-    @GetMapping("/Halls")
+    @GetMapping("/halls")
     public ResponseEntity<List<Hall>> getHalls() {
         List<Hall> hallList = hallService.getHall();
 

@@ -21,9 +21,10 @@ public class Timeslot {
     @JoinColumn(name = "hall", referencedColumnName = "id")
     Hall hall;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "timeslot")
-    @JsonBackReference
-    private Set<Movie> movies = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "movie", referencedColumnName = "id")
+    private Movie movie;
+
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "timeslot")
     @JsonBackReference
@@ -62,13 +63,7 @@ public class Timeslot {
         this.hall = hall;
     }
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
 
-    public void setMovies(Set<Movie> movies) {
-        this.movies = movies;
-    }
 
     public Set<Seat> getSeats() {
         return seats;
@@ -78,4 +73,11 @@ public class Timeslot {
         this.seats = seats;
     }
 
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 }

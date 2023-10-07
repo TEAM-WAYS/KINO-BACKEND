@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/seats")
-
+@CrossOrigin
 public class SeatRestController {
 
 
@@ -20,7 +19,7 @@ public class SeatRestController {
         @Autowired
         private SeatService seatService;
 
-        @GetMapping("")
+        @GetMapping("/seats")
         public ResponseEntity<List<Seat>> getSeats() {
             List<Seat> seatList = seatService.getSeats();
 
@@ -31,7 +30,7 @@ public class SeatRestController {
             }
         }
 
-        @PostMapping("")
+        @PostMapping("/seat")
         public ResponseEntity<?> createSeat(@RequestBody Seat seat) {
             Optional<Seat> savedSeat = seatService.createSeat(seat);
 
@@ -42,7 +41,7 @@ public class SeatRestController {
             }
         }
 
-        @PutMapping("/{id}")
+        @PutMapping("/seat/{id}")
         public ResponseEntity<?> updateSeat(@PathVariable int id, @RequestBody Seat seat) {
             Optional<Seat> updatedSeat = seatService.updateSeat(id, seat);
 
@@ -53,7 +52,7 @@ public class SeatRestController {
             }
         }
 
-        @DeleteMapping("/delete/{id}")
+        @DeleteMapping("/seat/delete/{id}")
         public ResponseEntity<String> deleteSeat(@PathVariable int id) {
             boolean isDeleted = seatService.deleteSeat(id);
 

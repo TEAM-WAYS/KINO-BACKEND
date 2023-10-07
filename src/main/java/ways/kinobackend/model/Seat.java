@@ -16,9 +16,9 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "timeslot", referencedColumnName = "id")
     Timeslot timeslot;
-    @OneToOne(cascade = CascadeType.ALL , mappedBy = "seat")
+    /*@OneToOne(cascade = CascadeType.ALL , mappedBy = "seat")
     @JsonBackReference
-    private User user ;
+    private User user ;*/
 
     public int getStatus() {
         return status;
@@ -59,12 +59,13 @@ public class Seat {
     public void setTimeslot(Timeslot timeslot) {
         this.timeslot = timeslot;
     }
-
+/*
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
+
 }

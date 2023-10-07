@@ -17,13 +17,22 @@ public class TimeslotRestController {
     private TimeslotService timeslotService;
 
     @GetMapping("/timeslots")
-    public ResponseEntity<List<Timeslot>> gettimeslot() {
+    public ResponseEntity<List<Timeslot>> gettimeslots() {
         List<Timeslot> timeList = timeslotService.getTimeslot();
 
         if (timeList.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeList);
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(timeList);
+        }
+    }@GetMapping("/timeslot/{id}")
+    public ResponseEntity<Optional<Timeslot>> getTimeslot(@PathVariable int id) {
+        Optional<Timeslot> timeslot = timeslotService.getTimeslotById(id);
+
+        if (timeslot.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeslot);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(timeslot);
         }
     }
 

@@ -11,9 +11,9 @@ public class User {
     private String passWord;
     private int email;
     private int phone;
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name="seat",referencedColumnName = "id")
-    private Seat seat;
+    private Seat seat;*/
 
 
     public int getId() {
@@ -56,11 +56,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Seat getSeat() {
+    /*public Seat getSeat() {
         return seat;
     }
 
     public void setSeat(Seat seat) {
         this.seat = seat;
-    }
+    }*/
 }

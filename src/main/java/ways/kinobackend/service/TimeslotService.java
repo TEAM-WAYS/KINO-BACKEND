@@ -13,4 +13,6 @@ public interface TimeslotService {
     Optional<Timeslot> putTimeslot(Timeslot timeslot);
 
     boolean deleteTimeslot(int id);
+
+    Optional<Timeslot> getTimeslotById(int id);
 }

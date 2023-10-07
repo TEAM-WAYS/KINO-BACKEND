@@ -22,9 +22,12 @@ public class Movie {
     private String description;
     private String pegi;
 
-    @ManyToOne
-    @JoinColumn(name = "timeslot", referencedColumnName = "id")
-    private Timeslot timeslot;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "movie")
+    @JsonBackReference
+    private Set<Timeslot> timeslots = new HashSet<>();
+
+
+
 
 
     public String getTitle() {
@@ -91,11 +94,11 @@ public class Movie {
         this.pegi = pegi;
     }
 
-    public Timeslot getTimeslot() {
-        return timeslot;
+    public Set<Timeslot> getTimeslots() {
+        return timeslots;
     }
 
-    public void setTimeslot(Timeslot timeslot) {
-        this.timeslot = timeslot;
+    public void setTimeslots(Set<Timeslot> timeslots) {
+        this.timeslots = timeslots;
     }
 }

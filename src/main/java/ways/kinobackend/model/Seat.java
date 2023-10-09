@@ -2,6 +2,7 @@ package ways.kinobackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Seat {
@@ -16,6 +17,9 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "timeslot", referencedColumnName = "id")
     Timeslot timeslot;
+    @ManyToOne
+    @JoinColumn(name = "user", referencedColumnName = "id")
+    User user;
     /*@OneToOne(cascade = CascadeType.ALL , mappedBy = "seat")
     @JsonBackReference
     private User user ;*/
@@ -59,13 +63,13 @@ public class Seat {
     public void setTimeslot(Timeslot timeslot) {
         this.timeslot = timeslot;
     }
-/*
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
+
 
 }

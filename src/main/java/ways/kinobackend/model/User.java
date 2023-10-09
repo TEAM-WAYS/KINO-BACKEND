@@ -1,6 +1,10 @@
 package ways.kinobackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -11,6 +15,9 @@ public class User {
     private String passWord;
     private int email;
     private int phone;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    @JsonBackReference
+    private Set<Seat> seat = new HashSet<>();
    /* @OneToOne
     @JoinColumn(name="seat",referencedColumnName = "id")
     private Seat seat;*/
@@ -63,4 +70,12 @@ public class User {
     public void setSeat(Seat seat) {
         this.seat = seat;
     }*/
+
+    public Set<Seat> getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Set<Seat> seat) {
+        this.seat = seat;
+    }
 }

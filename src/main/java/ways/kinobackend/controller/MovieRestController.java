@@ -42,25 +42,6 @@ public class MovieRestController {
         }
     }
 
-    // possible better way of doing post not tested
-    /*
-        @PostMapping
-    public ResponseEntity<?> postMovie(@Valid @RequestBody Movie movie, BindingResult bindingResult) {
-        // Validerer Movie objektet der kommer
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation error: " + bindingResult.getAllErrors());
-        }
-
-        try {
-            Movie savedMovie = movieService.saveMovie(movie);
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
-        } catch (Exception e) {
-            // Handle any exceptions that may occur during movie creation
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save the movie: " + e.getMessage());
-        }
-    }
-     */
 
     @PutMapping("/movies")
     public ResponseEntity<?> putMovie(@RequestBody Movie movie){
@@ -81,6 +62,16 @@ public class MovieRestController {
             return ResponseEntity.status(HttpStatus.OK).body("movie deleted");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("movie not deleted");
+        }
+    }
+    @GetMapping("/movies/{movieId}")
+    public ResponseEntity<?> getMovieById(@PathVariable int movieId) {
+        Optional<Movie> foundMovie = movieService.getMovieById(movieId);
+
+        if (foundMovie.isPresent()) {
+            return ResponseEntity.ok(foundMovie.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
         }
     }
 }

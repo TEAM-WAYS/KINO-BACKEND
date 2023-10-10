@@ -17,6 +17,9 @@ public class MovieServiceImpl implements MovieService{
     public List<Movie> getMovies(){
         return movieRepository.findAll();
     }
+    public Optional<Movie> getMovieById(int movieId) {
+        return movieRepository.findById(movieId);
+    }
 
     @Override
     public Optional<Movie> postMovie(Movie movie){
@@ -26,7 +29,6 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public Optional<Movie> putMovie(Movie movie){
         Optional<Movie> foundMovie = movieRepository.findById(movie.getId());
-
         if (foundMovie.isPresent()){
             return Optional.of(movieRepository.save(movie));
         } else return Optional.empty();

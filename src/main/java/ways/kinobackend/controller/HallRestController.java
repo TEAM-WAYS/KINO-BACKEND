@@ -27,7 +27,7 @@ public class HallRestController {
         }
     }
 
-    @PostMapping("/Halls")
+    @PostMapping("/halls")
     public ResponseEntity<?> postHall(@RequestBody Hall hall) {
         Optional<Hall> savedHall = hallService.postHall(hall);
 

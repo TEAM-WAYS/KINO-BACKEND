@@ -16,6 +16,7 @@ public class Timeslot {
     private int id;
     private LocalTime start;
     private LocalTime end;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "hall", referencedColumnName = "id")
@@ -79,5 +80,13 @@ public class Timeslot {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

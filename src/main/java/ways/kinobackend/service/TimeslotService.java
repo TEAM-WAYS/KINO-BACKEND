@@ -15,4 +15,6 @@ public interface TimeslotService {
     boolean deleteTimeslot(int id);
 
     Optional<Timeslot> getTimeslotById(int id);
+
+    boolean sortTimeslots();
 }

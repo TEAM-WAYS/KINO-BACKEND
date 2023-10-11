@@ -2,9 +2,13 @@ package ways.kinobackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ways.kinobackend.coparetor.TimeslotDateComparetor;
+import ways.kinobackend.coparetor.TimeslotStarttimeComparator;
 import ways.kinobackend.model.Timeslot;
 import ways.kinobackend.repository.TimeslotRepository;
 
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 @Component
@@ -52,5 +56,25 @@ public class TimeslotImpl implements TimeslotService{
         else {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public boolean sortTimeslots() {
+        List<Timeslot> list = getTimeslot();
+        int s1 = list.size();
+        Collections.sort(list, new TimeslotDateComparetor().thenComparing(new TimeslotStarttimeComparator()));
+        int s2 = list.size();
+        if(s1!=s2){
+            return false;
+        }
+        try {
+            timeslotRepository.deleteAll();
+            timeslotRepository.saveAll(list);
+        }catch(Exception exception){
+            System.out.println(exception);
+            return false;
+        }
+
+        return true;
     }
 }

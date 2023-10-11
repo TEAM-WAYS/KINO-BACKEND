@@ -68,4 +68,18 @@ public class TimeslotRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("timeslot not deleted");
         }
     }
+
+
+    @GetMapping("/timeslot/sort")
+    public ResponseEntity<String> sortTimeslots(){
+        boolean sortedTime = timeslotService.sortTimeslots();
+        if (sortedTime) {
+            return ResponseEntity.status(HttpStatus.OK).body("timeslot deleted");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("timeslot not deleted");
+        }
+
+    }
+
+
 }

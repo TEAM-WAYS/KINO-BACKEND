@@ -58,7 +58,7 @@ public class HallRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("hall not deleted");
         }
     }
-    @GetMapping("/movies/{hallId}")
+    @GetMapping("/halls/{hallId}")
     public ResponseEntity<?> getHallById(@PathVariable int hallId) {
         Optional<Hall> foundHall = hallService.getHallById(hallId);
 

@@ -15,7 +15,7 @@ public class Hall {
     private int numberOfRows;
     private int seatsPrRow;
     private int screenSize;
-    private String name;
+    private String hallName;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "hall")
     @JsonBackReference
     private Set<Timeslot>  timeslot = new HashSet<>();
@@ -44,12 +44,12 @@ public class Hall {
         this.screenSize = screenSize;
     }
 
-    public String getName() {
-        return name;
+    public String getHallName() {
+        return hallName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHallName(String hallName) {
+        this.hallName = hallName;
     }
 
     public int getSeatsPrRow() {

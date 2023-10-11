@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface HallService {
     List<Hall> getHall();
-
+    Optional<Hall> getHallById(int id);
     Optional<Hall> postHall(Hall hall);
 
     Optional<Hall> putHall(Hall hall);

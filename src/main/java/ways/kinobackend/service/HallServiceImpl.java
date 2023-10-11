@@ -17,7 +17,9 @@ public class HallServiceImpl implements HallService{
     public List<Hall> getHall(){
         return hallRepository.findAll();
     }
-
+    public Optional<Hall> getHallById(int hallId) {
+        return hallRepository.findById(hallId);
+    }
     @Override
     public Optional<Hall> postHall(Hall hall){
         return Optional.of(hallRepository.save(hall));

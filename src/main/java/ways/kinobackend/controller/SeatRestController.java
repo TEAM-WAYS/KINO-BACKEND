@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ways.kinobackend.model.Seat;
 import ways.kinobackend.service.SeatService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,27 @@ public class SeatRestController {
                 return ResponseEntity.status(HttpStatus.OK).body(seatList);
             }
         }
+        @GetMapping("/seats/{timeslotId}")
+        public ResponseEntity<List<Seat>> getSeatWhereTimeslotId(@PathVariable int timeslotId){
+            List<Seat> timeslotSeatList = seatService.getSeatWhereTimeslotId(timeslotId);
+            /*
+            List<Seat> timslotSeatList = new ArrayList<>();
+            List<Seat>  seats = seatService.getSeats();
+            for(Seat seat : seats){
+                if(seat.getTimeslot().getId()==timeslotId){
+                    timslotSeatList.add(seat);
+                }
+            }
+
+             */
+            if (timeslotSeatList.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeslotSeatList);
+            } else {
+                return ResponseEntity.status(HttpStatus.OK).body(timeslotSeatList);
+            }
+
+        }
+
 
         @PostMapping("/seat")
         public ResponseEntity<?> createSeat(@RequestBody Seat seat) {

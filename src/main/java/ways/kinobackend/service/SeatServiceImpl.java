@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ways.kinobackend.model.Seat;
 import ways.kinobackend.repository.SeatRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,17 @@ public class SeatServiceImpl implements SeatService {
     public List<Seat> getSeats() {
         return seatRepository.findAll();
     }
-
+    @Override
+    public List<Seat>getSeatWhereTimeslotId(int id){
+        List<Seat> timeslotSeatList = new ArrayList<>();
+        List<Seat>  seats = seatRepository.findAll();
+        for(Seat seat : seats){
+            if(seat.getTimeslot().getId()==id){
+                timeslotSeatList.add(seat);
+            }
+        }
+        return timeslotSeatList;
+    }
     @Override
     public Optional<Seat> createSeat(Seat seat) {
         return Optional.of(seatRepository.save(seat));
@@ -47,4 +58,6 @@ public class SeatServiceImpl implements SeatService {
 
         return false;
     }
+
+
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ways.kinobackend.DTO.ApiResponse;
 import ways.kinobackend.model.Movie;
 import ways.kinobackend.repository.MovieRepository;
 import ways.kinobackend.service.MovieService;
@@ -44,13 +45,13 @@ public class MovieRestController {
 
 
     @PutMapping("/movies")
-    public ResponseEntity<?> putMovie(@RequestBody Movie movie){
+    public ResponseEntity<ApiResponse> putMovie(@RequestBody Movie movie){
         Optional<Movie> foundMovie = movieService.putMovie(movie);
 
         if (foundMovie.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found or couldn't be updated");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Movie not found or couldn't be updated"));
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body("Movie updated successfully");
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Movie updated successfully"));
         }
     }
 

@@ -30,8 +30,10 @@ public class SeatRestController {
                 return ResponseEntity.status(HttpStatus.OK).body(seatList);
             }
         }
-        @GetMapping("/seats/{timslotId}")
+        @GetMapping("/seats/{timeslotId}")
         public ResponseEntity<List<Seat>> getSeatWhereTimeslotId(@PathVariable int timeslotId){
+            List<Seat> timeslotSeatList = seatService.getSeatWhereTimeslotId(timeslotId);
+            /*
             List<Seat> timslotSeatList = new ArrayList<>();
             List<Seat>  seats = seatService.getSeats();
             for(Seat seat : seats){
@@ -39,10 +41,12 @@ public class SeatRestController {
                     timslotSeatList.add(seat);
                 }
             }
-            if (timslotSeatList.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timslotSeatList);
+
+             */
+            if (timeslotSeatList.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeslotSeatList);
             } else {
-                return ResponseEntity.status(HttpStatus.OK).body(timslotSeatList);
+                return ResponseEntity.status(HttpStatus.OK).body(timeslotSeatList);
             }
 
         }

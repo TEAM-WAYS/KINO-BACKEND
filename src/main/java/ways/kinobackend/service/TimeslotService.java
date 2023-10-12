@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface TimeslotService {
     List<Timeslot> getTimeslot();
-    List<Timeslot> findAllOrderByDateAscStartAsc();
 
     Optional<Timeslot> postTimeslot(Timeslot timeslot);
 

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface TimeslotRepository extends JpaRepository<Timeslot,String> {
     Optional<Timeslot> findById(int id);
-    List<Timeslot> findAllOrderByDateAscStartAsc();
+
 }

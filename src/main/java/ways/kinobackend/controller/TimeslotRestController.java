@@ -27,16 +27,6 @@ public class TimeslotRestController {
         }
     }
 
-    @GetMapping("/timesorted")
-    public ResponseEntity<List<Timeslot>> gettimesorted() {
-        List<Timeslot> timeList = timeslotService.findAllOrderByDateAscStartAsc();
-
-        if (timeList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeList);
-        } else {
-            return ResponseEntity.status(HttpStatus.OK).body(timeList);
-        }
-    }
     @GetMapping("/timeslot/{id}")
     public ResponseEntity<Optional<Timeslot>> getTimeslot(@PathVariable int id) {
         Optional<Timeslot> timeslot = timeslotService.getTimeslotById(id);

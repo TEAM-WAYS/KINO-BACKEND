@@ -1,6 +1,7 @@
 package ways.kinobackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import ways.kinobackend.coparetor.TimeslotDateComparetor;
 import ways.kinobackend.coparetor.TimeslotStarttimeComparator;
@@ -18,7 +19,7 @@ public class TimeslotImpl implements TimeslotService{
 
     @Override
     public List<Timeslot> getTimeslot(){
-        return timeslotRepository.findAll();
+        return timeslotRepository.findAll(Sort.by(Sort.Direction.ASC, "start"));
     }
 
     @Override

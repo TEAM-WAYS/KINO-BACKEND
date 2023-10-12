@@ -22,6 +22,11 @@ public class TimeslotImpl implements TimeslotService{
     }
 
     @Override
+    public List<Timeslot> findAllOrderByDateAscStartAsc(){
+        return timeslotRepository.findAllOrderByDateAscStartAsc();
+    }
+
+    @Override
     public Optional<Timeslot> postTimeslot(Timeslot timeslot){
         return Optional.of(timeslotRepository.save(timeslot));
     }

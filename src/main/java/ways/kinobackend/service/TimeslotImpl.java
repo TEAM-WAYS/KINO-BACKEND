@@ -8,6 +8,7 @@ import ways.kinobackend.model.Timeslot;
 import ways.kinobackend.repository.TimeslotRepository;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -76,5 +77,18 @@ public class TimeslotImpl implements TimeslotService{
         }
 
         return true;
+    }
+
+    @Override
+    public List<Timeslot> getTimeslotByMovieId(int movieId) {
+        List<Timeslot> timeslots = timeslotRepository.findAll();
+        List<Timeslot> withMovieList = new ArrayList<>();
+        for(Timeslot timeslot : timeslots){
+            if(timeslot.getMovie().getId()==movieId){
+                withMovieList.add(timeslot);
+            }
+        }
+
+        return withMovieList;
     }
 }

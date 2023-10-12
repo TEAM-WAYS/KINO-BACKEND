@@ -17,4 +17,6 @@ public interface TimeslotService {
     Optional<Timeslot> getTimeslotById(int id);
 
     boolean sortTimeslots();
+
+    List<Timeslot> getTimeslotByMovieId(int movieId);
 }

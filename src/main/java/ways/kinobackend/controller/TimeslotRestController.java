@@ -25,7 +25,8 @@ public class TimeslotRestController {
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(timeList);
         }
-    }@GetMapping("/timeslot/{id}")
+    }
+    @GetMapping("/timeslot/{id}")
     public ResponseEntity<Optional<Timeslot>> getTimeslot(@PathVariable int id) {
         Optional<Timeslot> timeslot = timeslotService.getTimeslotById(id);
 
@@ -35,6 +36,17 @@ public class TimeslotRestController {
             return ResponseEntity.status(HttpStatus.OK).body(timeslot);
         }
     }
+    @GetMapping("/timeslot/{movieId}")
+    public ResponseEntity<List<Timeslot>> getTimeslotsByMovieId(@PathVariable int movieId) {
+        List<Timeslot> timeslots = timeslotService.getTimeslotByMovieId(movieId);
+
+        if (timeslots.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(timeslots);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(timeslots);
+        }
+    }
+
 
     @PostMapping("/timeslots")
     public ResponseEntity<?> postTime(@RequestBody Timeslot timeslot) {

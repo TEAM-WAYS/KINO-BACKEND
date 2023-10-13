@@ -26,6 +26,7 @@ public class TimeslotRestController {
             return ResponseEntity.status(HttpStatus.OK).body(timeList);
         }
     }
+
     @GetMapping("/timeslot/{id}")
     public ResponseEntity<Optional<Timeslot>> getTimeslot(@PathVariable int id) {
         Optional<Timeslot> timeslot = timeslotService.getTimeslotById(id);
@@ -70,7 +71,7 @@ public class TimeslotRestController {
         }
     }
 
-    @DeleteMapping("/timeslot/delete/{id}")
+    @DeleteMapping("/timeslots/delete/{id}")
     public ResponseEntity<String> deleteTime(@PathVariable int id) {
         Boolean foundTime = timeslotService.deleteTimeslot(id);
 

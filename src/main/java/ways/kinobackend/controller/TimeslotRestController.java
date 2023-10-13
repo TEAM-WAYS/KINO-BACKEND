@@ -36,7 +36,7 @@ public class TimeslotRestController {
             return ResponseEntity.status(HttpStatus.OK).body(timeslot);
         }
     }
-    @GetMapping("/timeslot/{movieId}")
+    @GetMapping("/timeslots/{movieId}")
     public ResponseEntity<List<Timeslot>> getTimeslotsByMovieId(@PathVariable int movieId) {
         List<Timeslot> timeslots = timeslotService.getTimeslotByMovieId(movieId);
 
@@ -70,7 +70,7 @@ public class TimeslotRestController {
         }
     }
 
-    @DeleteMapping("/timeslots/delete/{id}")
+    @DeleteMapping("/timeslot/delete/{id}")
     public ResponseEntity<String> deleteTime(@PathVariable int id) {
         Boolean foundTime = timeslotService.deleteTimeslot(id);
 
@@ -82,13 +82,13 @@ public class TimeslotRestController {
     }
 
 
-    @GetMapping("/timeslot/sort")
+    @GetMapping("/timeslots/sort")
     public ResponseEntity<String> sortTimeslots(){
         boolean sortedTime = timeslotService.sortTimeslots();
         if (sortedTime) {
-            return ResponseEntity.status(HttpStatus.OK).body("timeslot deleted");
+            return ResponseEntity.status(HttpStatus.OK).body("timeslot sorted");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("timeslot not deleted");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("timeslot not sorted");
         }
 
     }

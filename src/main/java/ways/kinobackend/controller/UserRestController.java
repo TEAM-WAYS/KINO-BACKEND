@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ways.kinobackend.DTO.ApiResponse;
 import ways.kinobackend.model.User;
 import ways.kinobackend.service.UserService;
 
@@ -29,24 +30,25 @@ public class UserRestController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<?> postUser(@RequestBody User user){
+    public ResponseEntity<?> postUser(@RequestBody User user) {
+
         Optional<User> savedUser = userService.postUser(user);
 
-        if (savedUser.isPresent()){
+        if (savedUser.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(savedUser.get());
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("user didn't save");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User didn't save");
         }
     }
 
     @PutMapping("/users")
-    public ResponseEntity<?> putUser(@RequestBody User user){
-        Optional<User> foundUser = userService.putUser(user);
+    public ResponseEntity<ApiResponse> putUser(@RequestBody User user) {
+        Optional<User> updatedUser = userService.putUser(user);
 
-        if (foundUser.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user didn't update");
+        if (updatedUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("User updated successfully"));
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body("user updated successfully");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("User not found or couldn't be updated"));
         }
     }
     @DeleteMapping("/users/delete/{id}")
